@@ -35,11 +35,9 @@ def generate_stock_data(num_records):
     return stock_data
 
 # Directory to write to HDFS
-output_path = "/presentation_demo/data/stream/output_sink/"  # Change this to your HDFS output path
+output_path = "/presentation_demo/data/stream/output_sink/"
 
-# Generate stock data for a duration (e.g., 10 minutes)
-
-
+p_start_time = time.time()
 while True:
     start_time = datetime.now()
     num_records = random.randint(10, 100)  # Number of records to generate (20 records for 10 minutes with 30 sec intervals)
@@ -61,5 +59,6 @@ while True:
 
     print(f"Written {num_records} records to HDFS between time interval {start_time} {datetime.now()}")
 
-# Stop the Spark session when done (this line will never be reached in this loop)
-spark.stop()
+    # if time.time() - p_start_time >= 5 * 60:
+    #     # Stop the Spark session
+    #     spark.stop()

@@ -56,7 +56,7 @@ def count_rows_and_print(batch_df, batch_id):
 # Write output to console and optionally to a CSV file
 query = vwap_df \
     .writeStream \
-    .outputMode("append") \
+    .outputMode("update") \
     .foreachBatch(lambda batch_df, batch_id: (
         count_rows_and_print(batch_df, batch_id)
         # Optionally, write to CSV
